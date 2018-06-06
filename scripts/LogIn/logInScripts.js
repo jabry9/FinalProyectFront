@@ -50,16 +50,4 @@ const logIn = (nameOrEmail = '', password = '', cb) => {
                             cb(false);
                         });
                 });
-
-                $.ajax({
-                    type: 'POST',
-                    url: direction+'Usuarios/login',
-                    dataType: 'application/json',
-                    data: {
-                        email: nameOrEmail,
-                        password: password
-                    },
-                    success: function() { alert("Success"); },
-                    error: function() { alert("Error"); }
-                });
 }

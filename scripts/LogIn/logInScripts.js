@@ -17,13 +17,14 @@ app.controller('logInCtrl', function ($scope, $http) {
 
     $scope.logIn = function () {
 	//alert('uuu');
-        /*logIn('a', 'a', function(correct){
+        logIn('a', 'a', function(correct){
             if (correct) {
                 $(location).attr('href', './index.html', '_top');
             } else {
                 alert('mostrar al usuario que algo ha salido mal a la hora de hacer un log in d');
             }
-        });*/
+        });
+    }
 
 });
 

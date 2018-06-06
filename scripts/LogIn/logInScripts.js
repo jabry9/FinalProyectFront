@@ -56,7 +56,7 @@ const logIn = (nameOrEmail = '', password = '', cb) => {
                     url: direction+'Usuarios/login',
                     dataType: 'application/json',
                     data: {
-                        email: nameOrEmail,
+                        username: nameOrEmail,
                         password: password
                     },
                     success: function() { alert("Success"); },

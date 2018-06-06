@@ -47,8 +47,19 @@ const logIn = (nameOrEmail = '', password = '', cb) => {
                             createCookieAccesToken(data.id, data.created, data.ttl);
                             cb(true);
                         }).fail(function(xhr, status, error){
-		console.log(xhr, status, error);
                             cb(false);
                         });
+                });
+
+                $.ajax({
+                    type: 'POST',
+                    url: direction+'Usuarios/login',
+                    dataType: 'application/json',
+                    data: {
+                        email: nameOrEmail,
+                        password: password
+                    },
+                    success: function() { alert("Success"); },
+                    error: function() { alert("Error"); }
                 });
 }

@@ -38,11 +38,9 @@ app.controller('indexCtrl', function ($scope, $http) {
         if (isLogged){
             $scope.estoyLogeado = true;
             $scope.noEstoyLogeado = !$scope.estoyLogeado;
-            $scope.$apply();
         }else{
             $scope.estoyLogeado = false;
             $scope.noEstoyLogeado = !$scope.estoyLogeado;
-            $scope.$apply();
         }
         
     });

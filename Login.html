@@ -4,7 +4,7 @@
 <meta name="viewport" content="user-scalable=no, initial-scale=1.0, maximum-scale=1.0 minimal-ui" />
 <meta name="apple-mobile-web-app-capable" content="yes" />
 <meta name="apple-mobile-web-app-status-bar-style" content="black">
-
+<meta http-equiv="Content-Security-Policy" content="block-all-mixed-content">
 <title>PREJW 1.0</title>
     
 <link rel="stylesheet" type="text/css" href="styles/style.css">
@@ -13,14 +13,13 @@
 <link rel="stylesheet" type="text/css" href="styles/ionicons.min.css">
 <link href='https://fonts.googleapis.com/css?family=Roboto:400,100,100italic,300,300italic,400italic,500,500italic,700,700italic,900,900italic' rel='stylesheet' type='text/css'>
 
-<script type="text/javascript" src="scripts/jquery.js"></script>
-<script type="text/javascript" src="scripts/plugins.js"></script>
-<script type="text/javascript" src="scripts/custom.js"></script>
-<script type="text/javascript" src="scripts/ownCustomCode.js"></script>
-<script type="text/javascript" src="scripts/ownCustomCodeFront.js"></script>
+<script src="https://waja.ovh/scripts/jquery.js"></script>
+<script src="https://waja.ovh/scripts/plugins.js"></script>
+<script src="https://waja.ovh/scripts/custom.js"></script>
+<script src="https://waja.ovh/scripts/ownCustomCode.js"></script>
+<script src="https://waja.ovh/scripts/ownCustomCodeFront.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
-<script type="text/javascript" src="scripts/LogIn/logInScripts.js"></script>
-
+<script src="https://waja.ovh/scripts/LogIn/logInScripts.js"></script>
 
 
 
@@ -66,6 +65,7 @@
         <div class="content" id="tab-1">
             <div class="thumb-layout">
                     
+<form>
                 <div class="page-login content full-bottom">
                     <div class="page-login-input">
                         <i class="login-icon ion-person"></i>
@@ -80,13 +80,13 @@
                         <div class="clear"></div>
                     </div>            
         
-                    <a href="#" id="loginButtonJW" ng-click="logIn()" class="button button-green button-icon button-full half-top full-bottom"><i class="ion-log-in"></i>Login</a>
+                    <a href="#" ng-click="logIn()" class="button button-green button-icon button-full half-top full-bottom"><i class="ion-log-in"></i>Login</a>
         
                     <div class="decoration"></div>
         
                     <a href="Register.html" class="button button-blue button-icon button-full half-top full-bottom"><i class="ion-person-add"></i>Create Account</a>           
                 </div>
-              
+              </form>
             </div>
         </div>
          

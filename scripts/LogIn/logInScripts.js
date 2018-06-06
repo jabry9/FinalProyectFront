@@ -5,24 +5,30 @@ alredyLogged(function(isLogged){
 });
 
 var app = angular.module('logInApp', []);
+
+app.config( function($httpProvider) {
+	$httpProvider.defaults.headers.commonAccept = 'application/json, text/plain'
+        $httpProvider.defaults.useXDomain = true;
+            delete $httpProvider.defaults.headers.common['X-Requested-With'];
+        }
+    );
 app.controller('logInCtrl', function ($scope, $http) {
 
+
     $scope.logIn = function () {
-        logIn($scope.usernameUser, $scope.passwordUser, function(correct){
+	//alert('uuu');
+        /*logIn('a', 'a', function(correct){
             if (correct) {
                 $(location).attr('href', './index.html', '_top');
             } else {
-                alert('mostrar al usuario que algo ha salido mal a la hora de hacer un log in');
+                alert('mostrar al usuario que algo ha salido mal a la hora de hacer un log in d');
             }
-        });
-    }
+        });*/
 
 });
 
 const logIn = (nameOrEmail = '', password = '', cb) => {
-    alredyLogged(function(isLogged){
-        if (false === isLogged){
-                $.post(direction+'Usuarios/login',
+ $.post(direction+'Usuarios/login',
                 {
                     username: nameOrEmail,
                     password: password
@@ -40,12 +46,8 @@ const logIn = (nameOrEmail = '', password = '', cb) => {
                             createCookieAccesToken(data.id, data.created, data.ttl);
                             cb(true);
                         }).fail(function(xhr, status, error){
+		console.log(xhr, status, error);
                             cb(false);
                         });
                 });
-            }
-        else
-            cb(true);
-    });
-
 }

@@ -1,4 +1,4 @@
-const direction = 'http://localhost:3000/api/'; 
+const direction = 'https://waja.ovh:3000/api/'; 
 let coord = {
         coords: {
             latitude: 37.8354703,

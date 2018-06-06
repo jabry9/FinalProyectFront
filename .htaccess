@@ -1,0 +1,12 @@
+<VirtualHost *:80>
+	ServerName www.waja.ovh
+	ServerAdmin webmaster@localhost
+	DocumentRoot /var/www/FinalProyectFront
+	ErrorDocument 404 /error404.html
+	DirectoryIndex index.html
+
+	ErrorLog ${APACHE_LOG_DIR}/error-waja.log
+	CustomLog ${APACHE_LOG_DIR}/access-waja.log combined
+</VirtualHost>
+
+

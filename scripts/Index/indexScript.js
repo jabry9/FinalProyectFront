@@ -48,8 +48,12 @@ app.controller('indexCtrl', function ($scope, $http) {
 setTimeout(function(){    $http.get(direction+"Anuncios/getByPaginatione?page="+$scope.page+"&adsPerPage=4&title="+$scope.titulo+"&category="+$scope.categoria)
 .then(function(response) {
     response.data.map(e => {
+
+var image = e.multimedia[0];
+if (image  == null)
+image = {url: 'https://www.freeiconspng.com/uploads/no-image-icon-21.png'};
         $scope.records.push({
-            img: e.multimedia[0],
+            img: image ,
             titulo: e.titulo,
             city: e.city,
             materialsInclude: e.materialsINC,
@@ -65,8 +69,12 @@ $scope.page++;},50);
         $http.get(direction+"Anuncios/getByPaginatione?page="+$scope.page+"&adsPerPage=4&title="+$scope.titulo+"&category="+$scope.categoria)
         .then(function(response) {
             response.data.map(e => {
-                $scope.records.push({
-                    img: e.multimedia[0],
+var image = e.multimedia[0];
+if (image  == null)
+image = {url: 'https://www.freeiconspng.com/uploads/no-image-icon-21.png'};
+
+        $scope.records.push({
+            img: image ,
                     titulo: e.titulo,
                     city: e.city,
                     materialsInclude: e.materialsINC,
@@ -75,6 +83,7 @@ $scope.page++;},50);
                 });
             });
         });
+	
         $scope.page++;
     }
 

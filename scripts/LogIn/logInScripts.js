@@ -16,8 +16,7 @@ app.controller('logInCtrl', function ($scope, $http) {
 
 
     $scope.logIn = function () {
-	//alert('uuu');
-        logIn('a', 'a', function(correct){
+        logIn($scope.usernameUser, $scope.passwordUser, function(correct){
             if (correct) {
                 $(location).attr('href', './index.html', '_top');
             } else {
@@ -28,7 +27,7 @@ app.controller('logInCtrl', function ($scope, $http) {
 
 });
 
-const logIn = (nameOrEmail = '', password = '', cb) => {
+const logIn = (nameOrEmail, password, cb) => {
  $.post(direction+'Usuarios/login',
                 {
                     username: nameOrEmail,

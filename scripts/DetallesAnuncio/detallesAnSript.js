@@ -2,10 +2,16 @@ var app = angular.module('detallesANApp', []);
 
 app.controller('detallesANCtrl', function ($scope, $http) {
 
-
+    $scope.anuncio = null;
+    $scope.onlyEmpresa = false;
+    
     alredyLogged(function(isLogged){
         if (isLogged){
             $scope.estoyLogeado = true;
+            isEmpresa(function(empres){
+                $scope.onlyEmpresa = empres;
+	$scope.$apply();
+            })
             $scope.noEstoyLogeado = !$scope.estoyLogeado;
             $scope.$apply();
         }else{
@@ -22,10 +28,19 @@ app.controller('detallesANCtrl', function ($scope, $http) {
         $(location).attr('href', './index.html', '_top');
     }
 
-    getAd($scope.anuncioId, function(data){
-        initMap();
-        console.log(data);
-    });
+
+        getAd($scope.anuncioId, function(data){
+                    $scope.anuncio = data.ad;
+                    const monthNames = ["January", "February", "March", "April", "May", "June",
+                    "July", "August", "September", "October", "November", "December"
+                    ];
+                    const dateAux = new Date($scope.anuncio.date);
+                    $scope.anuncio.date = dateAux.getDate() + " " + monthNames[(dateAux.getMonth() + 1)] + " "+ dateAux.getFullYear();
+                    $scope.anuncio.solicitudes = $scope.anuncio.solicitudes.length;
+                    $scope.$apply();
+                    initMap($scope.anuncio.location.lat, $scope.anuncio.location.lng);
+        });
+    
 
 });
 
@@ -44,8 +59,8 @@ const getAd = (id, cb) => {
 
 
 
-function initMap() {
-  var posicion = new google.maps.LatLng(-34.397, 150.644);
+function initMap(Olat, Olng) {
+  var posicion = new google.maps.LatLng(Olat, Olng);
 
   var mapCanvas = document.getElementById("map");
   var mapOptions = {
@@ -65,4 +80,18 @@ function initMap() {
       fillOpacity: 0.4
   });
   myCity.setMap(map);
+}
+
+const isEmpresa = (cb) =>{
+    $.get(direction+"Empresas/getCurrentLogedEmpresa?access_token="+getCookieAccesToken())
+    .then(function(data) {
+ console.log(data);
+        if (null !== data.Empresa)
+            cb(true);
+        else 
+            cb(false);
+    })
+    .fail(function(){
+        cb(false);
+    });
 }

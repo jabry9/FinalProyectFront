@@ -77,7 +77,7 @@
                 <div ng-show="muestraFiltroTitulo">{{titulo}}</div>
 
                 <a href="Ver-anuncio.html" target="_top" ng-repeat="x in records" ng-click="saveAdd(x)">
-                        <img class="preload-image" data-original={{x.img}} alt="img" src={{x.img}}>
+                        <img style="max-width: 4rem; height: auto;" class="preload-image" data-original={{x.img.url}} alt="img" src={{x.img.url}}>
                         <strong>{{x.titulo}}</strong>
                         <em>{{x.description}}</em>
                         <u><i class="ion-ios-location"></i> {{x.city}} <i class="ion-social-euro"></i> {{x.presupuesto}}<i class="ion-person"> {{x.autor}}</i></u>

@@ -22,14 +22,24 @@ app.controller('detallesANCtrl', function ($scope, $http) {
         $(location).attr('href', './index.html', '_top');
     }
 
-    $http.get(direction+"Anuncios/getAd?ads="+$scope.anuncioId)
-        .then(function(response) {
-            initMap();
-            console.log(response.data);
-        });
+    getAd($scope.anuncioId, function(data){
+        initMap();
+        console.log(data);
+    });
 
 });
 
+const getAd = (id, cb) => {
+    $.get(direction+"Anuncios/getAd",
+                   {
+                        ads: id
+                   }
+                   ).then(function(data) {
+                       cb(data);
+                   }).fail(function(xhr, status, error){
+                        cb(null);
+                   });
+   }
 
 
 
@@ -55,5 +65,4 @@ function initMap() {
       fillOpacity: 0.4
   });
   myCity.setMap(map);
-  
 }

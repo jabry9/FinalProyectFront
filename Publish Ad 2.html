@@ -19,48 +19,21 @@
 <script type="text/javascript" src="scripts/ownCustomCode.js"></script>
 <script type="text/javascript" src="scripts/ownCustomCodeFront.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
-<script type="text/javascript" src="scripts/AngularFile.js"></script>
+<script type="text/javascript" src="scripts/PublishUpdateAd/publishUpdateAdScript.js"></script>
 </head>
 
 <body>
-<div id="page-transitions">
+<div id="page-transitions" ng-app="publishUpdateAd1App" ng-controller="publishUpdateAd1Ctrl">
     
 <div class="page-preloader page-preloader-dark">
     <div class="spinner"></div>
 </div>
     
 <div class="header header-dark">
-    <a href="index.html" class="header-logo">MULTI<span class="color-red-dark">MEDIA</span></a>
-    <a href="Publish Ad 1.html" class="header-icon header-icon-1 menu-bar-text-1"><i class="ion-ios-arrow-left"></i></a>
-</div>
-    
-<!-- Main Small Icon Sidebar -->
-<div class="sidebar-menu sidebar-dark">
-    <div class="sidebar-menu-scroll">
-        <a href="index.html"><i class="ion-ios-star-outline"></i><em>Actualizar</em></a>       
-        <a class="current-menu" href="Publish Ad 1.html"><i class="ion-ios-list-outline"></i><em>Publicar</em></a>       
-        <a href="profile.html"><i class="ion-ios-person-outline"></i><em>Mi Perfil</em></a>      
-        <a href="Mis-mensajes.html"><i class="ion-ios-email-outline"></i><em>Mensajes</em></a>       
-        <a href="Mis-anuncios.html"><i class="ion-ios-compose-outline"></i><em>Mis Anuncios</em></a>
-        <a href="Solicitudes.html"><i class="ion-ios-cart-outline"></i><em>Solicitudes</em></a>
-        <a href="Mis-favoritos.html"><i class="ion-ios-star-outline"></i><em>Mis Favoritos</em></a>       
-        <a data-submenus="sub1" href="#"><i class="ion-ios-gear-outline"></i><em>Configuracion</em></a>  
-    </div>
+    <a href="index.html" target="_top" class="header-logo">MULTI<span class="color-red-dark">MEDIA</span></a>
+    <a href="Publish Ad 1.html" target="_top" class="header-icon header-icon-1 menu-bar-text-1"><i class="ion-ios-arrow-left"></i></a>
 </div>
 
-
-<!-- Configuracion Submenus -->
-<div class="submenu submenu-dark" id="sub1">
-    <div class="submenu-scroll">
-        <a class="close-sidebar" href="#"><i class="ion-ios-close-empty"></i><em>Cerrar</em></a>              
-        <a href="Login.html"><i class="ion-ios-unlocked-outline"></i><em>Iniciar Sesion</em></a>
-        <a href="Register.html"><i class="ion-ios-unlocked-outline"></i><em>Registrar</em></a>         
-        <a href="Notificacion.html"><i class="ion-ios-bell-outline"></i><em>Notificaciones</em></a>
-        <a href="#" class="logOutButtonJWClass"><i class="ion-ios-locked-outline"></i><em>Cerrar Sesion</em></a>
-        <a href="#"><i class="ion-help"></i><em>Ayuda</em></a>        
-        <a class="close-sidebar" href="#"><i class="ion-ios-close-empty"></i><em>Cerrar</em></a>  
-    </div>
-</div>
 
 
     
@@ -78,8 +51,8 @@
                         <form action="" method="post" class="contactForm" id="contactForm">
                            
                                 <div class="formFieldWrap">
-                                        <label class="field-title contactNameField" for="contactNameField">Seleccione im√°genes:<span>(required)</span></label>
-                                        <input type="file" name="img" multiple>
+                                        <label class="field-title contactNameField" for="contactNameField">Seleccione im·genes:<span>(required)</span></label>
+                                        <input type="file" ng-model="fileToUp" onchange="angular.element(this).scope().selecionada(this)" accept="image/*" name="img">
                                 </div>
 
                                 <div class="portfolio-adaptive-controls">
@@ -91,26 +64,14 @@
                                 </div>
             
                                 <div class="portfolio-adaptive portfolio-adaptive-three">
-                                        <div class="portfolio-item">
-                                            <a href="#" class="hide-notification"><i class="ion-android-close"></i></a>
-                                            <a class="show-gallery" href="images/pictures/1.jpg" title="Caption here!"><img data-original="images/pictures/1t.jpg" alt="img" class="preload-image responsive-image no-bottom" src="images/empty.png" ></a>
-                                        </div>                        
-                                        <div class="portfolio-item">
-                                            <a href="#" class="hide-notification"><i class="ion-android-close"></i></a>
-                                            <a class="show-gallery" href="images/pictures/2.jpg" title="Caption here!"><img data-original="images/pictures/2t.jpg" alt="img" class="preload-image responsive-image no-bottom" src="images/empty.png" ></a>
-                                        </div>                         
-                                        <div class="portfolio-item">
-                                            <a href="#" class="hide-notification"><i class="ion-android-close"></i></a>
-                                            <a class="show-gallery" href="images/pictures/3.jpg" title="Caption here!"><img data-original="images/pictures/3t.jpg" alt="img" class="preload-image responsive-image no-bottom" src="images/empty.png" ></a>
-                                        </div>                         
-                                        <div class="portfolio-item">
-                                            <a href="#" class="hide-notification"><i class="ion-android-close"></i></a>
-                                            <a class="show-gallery" href="images/pictures/4.jpg" title="Caption here!"><img data-original="images/pictures/4t.jpg" alt="img" class="preload-image responsive-image no-bottom" src="images/empty.png" ></a>
-                                        </div>                        
+                                        <div class="portfolio-item" ng-repeat="file in files">
+                                            <a href="#" ng-click="delete($index, file.name)" class="hide-notification"><i class="ion-android-close"></i></a>
+                                            <a class="show-gallery" href="{{direction2 + '/download/' + file.name}}" title="Caption here!"><img data-original="{{direction2 + '/download/' + file.name}}" alt="img" class="preload-image responsive-image no-bottom" src="{{direction2 + '/download/' + file.name}}" ></a>
+                                        </div>               
                                 </div>
                                  
                                
-                                <a href="#" class="button button-green" style="display: block;margin: auto;">Publicar Anuncio</a>
+                                <a href="index.html" target="_top" class="button button-green" style="display: block;margin: auto;">Finalizar</a>
                             
                         </form>       
                     </div>

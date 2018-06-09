@@ -1,7 +1,10 @@
+const direction2 = direction+'containers/anuncio'+sessionStorage.getItem("anuncioInsertado");
+
 var app = angular.module('publishUpdateAd1App', []);
 
 app.controller('publishUpdateAd1Ctrl', function ($scope, $http) {
 
+    $scope.direction2 = direction2;
     $scope.categories = [];
     $scope.bread = [];
     $scope.bread.push(0);
@@ -21,6 +24,75 @@ app.controller('publishUpdateAd1Ctrl', function ($scope, $http) {
             $scope.categories.push({cat: e.name, val: e.id});
         });
     });
+
+
+    carga();
+
+    function carga () {
+        $.ajax({
+            url: direction2+'/files',  
+            type: 'GET',
+            success:function(data){
+                $scope.files = data;
+                $scope.$apply();
+            }
+        });
+    }
+
+  
+      $scope.delete = function (index, id) {
+        $.ajax({
+            url: direction2+'/files/' + encodeURIComponent(id),  
+            type: 'DELETE',
+            success:function(data, status, headers){
+                $scope.files.splice(index, 1);
+                $scope.$apply();
+                carga();
+            }
+        });
+      };
+
+
+    $scope.selecionada = function(t) {
+
+       
+
+       up = new uploader(t, {
+            url: direction2+'/upload',
+            progress:function(ev){ 
+                console.log('progress'); 
+                console.log(((ev.loaded/ev.total)*100)+'%'); 
+            },
+            error:function(ev){ 
+                console.log('error'); 
+            },
+            success:function(data){ 
+                data = JSON.parse(data);
+                type = data.result.files.file[0].type;
+
+                       $.ajax({
+                        url: direction+'Multimedia',  
+                        type: 'POST',
+                        data: {
+                            anuncioId: sessionStorage.getItem("anuncioInsertado"),
+                            url: direction2+'/download/'+t.files[0].name,
+                            type: type
+                        },
+                        success:function(data){
+                            
+                            console.log('insertada bien la foto');
+                            carga();
+                        }
+                    });
+                 
+            }
+        });
+
+        up.send();
+
+
+    }
+
 
 
     $scope.publicaAd = function() {
@@ -103,7 +175,8 @@ const insertOrUpdate = (actionType, data, cb) => {
         url: direction+"Anuncios?access_token="+getCookieAccesToken(),
         contentType: 'application/json',
         data: JSON.stringify(data),
-    }).done(function () {
+    }).done(function (data) {
+        sessionStorage.setItem("anuncioInsertado", data.id);
         cb(true);
     }).fail(function (msg) {
         cb(false);

@@ -22,13 +22,7 @@ $scope.onlyEmpresaWithOutCredits = false;
             if (isLogged){
                 $scope.estoyLogeado = true;
                 isEmpresa(function(empres, complet){
-
-
-
                     alReadyHaveSolicitud($scope.anuncioId, function(already){
-
-
-
                         if (already){
                             $scope.accion = 'Modificar Solicitud';
                             $scope.onlyEmpresa = true;
@@ -36,17 +30,14 @@ $scope.onlyEmpresaWithOutCredits = false;
                             $scope.$apply();
                         }
                     })
-
                     if (empres && 0 >= complet.credits){
 		                $scope.onlyEmpresa = false;
 		                $scope.onlyEmpresaWithOutCredits = true;
-$scope.$apply();
+                        $scope.$apply();
                     } else {
                         $scope.onlyEmpresa = empres;
                         $scope.$apply();
-                    }
-                        
-                    
+                    }                    
                 })
             }
         });
@@ -60,7 +51,6 @@ alert('no tiene creditos');
 
     getAd($scope.anuncioId, function(data){
 if (null !== data){
-console.log(data);
         $scope.anuncio = data.ad;
         const monthNames = ["January", "February", "March", "April", "May", "June",
         "July", "August", "September", "October", "November", "December"
@@ -89,7 +79,7 @@ const getAd = (id, cb) => {
                    ).then(function(data) {
                        cb(data);
                    }).fail(function(xhr, status, error){
-console.log(error);
+                        console.log(error);
                         cb(null);
                    });
    }

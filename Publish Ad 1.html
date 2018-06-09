@@ -19,48 +19,21 @@
 <script type="text/javascript" src="scripts/ownCustomCode.js"></script>
 <script type="text/javascript" src="scripts/ownCustomCodeFront.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
-<script type="text/javascript" src="scripts/AngularFile.js"></script>
+<script type="text/javascript" src="scripts/PublishUpdateAd/publishUpdateAdScript.js"></script>
 </head>
 
 <body>
-<div id="page-transitions">
+<div id="page-transitions" ng-app="publishUpdateAd1App" ng-controller="publishUpdateAd1Ctrl">
     
 <div class="page-preloader page-preloader-dark">
     <div class="spinner"></div>
 </div>
     
 <div class="header header-dark">
-    <a href="index.html" class="header-logo">PUBLI<span class="color-red-dark">CAR</span></a>
-    <a href="#" class="header-icon header-icon-1 menu-bar-text-1 open-sidebar"><i class="ion-ios-arrow-left"></i></a>
+    <a href="index.html" target="_top" class="header-logo">PUBLI<span class="color-red-dark">CAR</span></a>
+    <a href="index.html" target="_top" class="header-icon header-icon-1 menu-bar-text-1 open-sidebar"><i class="ion-ios-arrow-left"></i></a>
 </div>
     
-<!-- Main Small Icon Sidebar -->
-<div class="sidebar-menu sidebar-dark">
-        <div class="sidebar-menu-scroll">
-            <a href="index.html"><i class="ion-ios-star-outline"></i><em>Actualizar</em></a>       
-            <a class="current-menu" href="Publish Ad 1.html"><i class="ion-ios-list-outline"></i><em>Publicar</em></a>       
-            <a href="profile.html"><i class="ion-ios-person-outline"></i><em>Mi Perfil</em></a>      
-            <a href="Mis-mensajes.html"><i class="ion-ios-email-outline"></i><em>Mensajes</em></a>       
-            <a href="Mis-anuncios.html"><i class="ion-ios-compose-outline"></i><em>Mis Anuncios</em></a>
-            <a href="Solicitudes.html"><i class="ion-ios-cart-outline"></i><em>Solicitudes</em></a>
-            <a href="Mis-favoritos.html"><i class="ion-ios-star-outline"></i><em>Mis Favoritos</em></a>       
-            <a data-submenus="sub1" href="#"><i class="ion-ios-gear-outline"></i><em>Configuracion</em></a>    
-        </div>
-    </div>
-
-
-    <!-- Configuracion Submenus -->
-<div class="submenu submenu-dark" id="sub1">
-    <div class="submenu-scroll">
-        <a class="close-sidebar" href="#"><i class="ion-ios-close-empty"></i><em>Cerrar</em></a>              
-        <a href="Login.html"><i class="ion-ios-unlocked-outline"></i><em>Iniciar Sesion</em></a>
-        <a href="Register.html"><i class="ion-ios-unlocked-outline"></i><em>Registrar</em></a>          
-        <a href="Notificacion.html"><i class="ion-ios-bell-outline"></i><em>Notificaciones</em></a>
-        <a href="#" class="logOutButtonJWClass" ><i class="ion-ios-locked-outline"></i><em>Cerrar Sesion</em></a>
-        <a href="#"><i class="ion-help"></i><em>Ayuda</em></a>        
-        <a class="close-sidebar" href="#"><i class="ion-ios-close-empty"></i><em>Cerrar</em></a>  
-    </div>
-</div>
 
 
     
@@ -76,32 +49,40 @@
                             <fieldset>
                                 <div class="formFieldWrap">
                                     <label class="field-title contactNameField" for="contactNameField">Titulo:<span>(required)</span></label>
-                                    <input type="text" name="contactNameField" value="" class="contactField requiredField" id="contactNameField"/>
+                                    <input type="text" ng-model="anuncio.titulo" name="contactNameField" value="" class="contactField requiredField" id="contactNameField"/>
                                 </div>
+                                <div class="formFieldWrap">
+                                    <label class="field-title contactNameField" for="contactNameField">Presupuesto Maximo:<span>(required)</span></label>
+                                    <input type="number" ng-model="anuncio.presupMAX" name="contactNameField" value="" class="contactField requiredField" id="contactNameField"/>
+                                </div>
+
+
+                                <div class="container overflow-show">
+                                    <h5 class="onoffswitch-text">Incluye materiales:</h5>
+                                    <div class="onoffswitch-2">
+                                        <input ng-model="materialsINC" type="checkbox" name="onoffswitch" class="onoffswitch-checkbox-2" id="myonoffswitch-2">
+                                        <label class="onoffswitch-label-2" for="myonoffswitch-2"></label>
+                                    </div>
+                                    <div class="clear"></div>
+                                </div>
+
                                 <div class="formTextareaWrap">
                                         <label class="field-title contactMessageTextarea" for="contactMessageTextarea">Descripcion: <span>(required)</span></label>
-                                        <textarea name="contactMessageTextarea" class="contactTextarea requiredField" id="contactMessageTextarea"></textarea>
+                                        <textarea name="contactMessageTextarea" ng-model="anuncio.description" class="contactTextarea requiredField" id="contactMessageTextarea"></textarea>
                                 </div>
+
+
+                                <div>Categoria selecionada {{currentCat}}</div>
+                                <button ng-click="back()"> back </button>
                                 <div class="select-box">
-                                        <select>
-                                            <option class="select-title" value="o0">Categoria</option>
-                                            <option value="o1">Option 1</option>
-                                            <option value="o2">Option 2</option>
-                                            <option value="o3">Option 3</option>
-                                            <option value="o4">Option 4</option>
-                                        </select>
-                                </div>
-                                <div class="select-box">
-                                        <select>
-                                            <option class="select-title" value="o0">Sub Categoria</option>
-                                            <option value="o1">Option 1</option>
-                                            <option value="o2">Option 2</option>
-                                            <option value="o3">Option 3</option>
-                                            <option value="o4">Option 4</option>
-                                        </select>
+                                    <select ng-model="item" ng-change="update()" >
+                                        <option data-ng-repeat="ca in categories track by $index" value={{ca.val}} >
+                                            {{ca.cat}}
+                                        </option>
+                                    </select>
                                 </div>
                                
-                                <a href="Publish Ad 2.html" class="button button-green" style="display: block;margin: auto;">Siguiente</a>
+                                <a href="#" ng-click="publicaAd()" class="button button-green" style="display: block;margin: auto;">Siguiente</a>
                             </fieldset>
                         </form>       
                     </div>

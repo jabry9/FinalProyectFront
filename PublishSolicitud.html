@@ -17,79 +17,53 @@
 <script type="text/javascript" src="scripts/plugins.js"></script>
 <script type="text/javascript" src="scripts/custom.js"></script>
 <script type="text/javascript" src="scripts/ownCustomCode.js"></script>
-<script type="text/javascript" src="scripts/angular.min.js"></script>
-<script type="text/javascript" src="scripts/Index/indexScript.js"></script>
-
+<script type="text/javascript" src="scripts/ownCustomCodeFront.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+<script type="text/javascript" src="scripts/PublishSolicitud/PublishSolicitudScripst.js"></script>
 </head>
 
 <body>
-<div id="page-transitions" ng-app="indexApp" ng-controller="indexCtrl">
+<div id="page-transitions" ng-app="publishSolicitudApp" ng-controller="publishSolicitudCtrl">
     
 <div class="page-preloader page-preloader-dark">
     <div class="spinner"></div>
 </div>
-
+    
 <div class="header header-dark">
-        <a href="index.html" class="header-logo">PRE <span class="color-red-dark">JW</span></a>
-        <a href="#" class="header-icon header-icon-1 close-sidebar-mask"></a>
-        <a href="#" class="header-icon header-icon-1 open-sidebar">
-            <em class="line-1"></em>
-            <em class="line-2"></em>
-            <em class="line-3"></em>    
-        </a>
-        <a href="search.html" target="_top" class="header-icon header-icon-4"><i class="ion-search"></i></a>
+    <a href="index.html" target="_top" class="header-logo">PUBLI<span class="color-red-dark">CAR</span></a>
+    <a href="Ver-anuncio.html" target="_top" class="header-icon header-icon-1 menu-bar-text-1 open-sidebar"><i class="ion-ios-arrow-left"></i></a>
 </div>
     
-<!-- Main Small Icon Sidebar -->
-<div class="sidebar-menu sidebar-dark">
-    <div class="sidebar-menu-scroll">   
-        <a ng-show="estoyLogeado" href="Publish Ad 1.html" target="_top"><i class="ion-ios-list-outline"></i><em>Publicar</em></a>       
-        <a ng-show="estoyLogeado" href="profile.html" target="_top"><i class="ion-ios-person-outline"></i><em>Perfil</em></a>          
-        <a ng-show="estoyLogeado" href="Mis-anuncios.html" target="_top"><i class="ion-ios-compose-outline"></i><em>Anuncios</em></a>
-        <a ng-show="estoyLogeado" href="Solicitudes.html" target="_top"><i class="ion-ios-cart-outline"></i><em>Solicitudes</em></a>     
-        <a data-submenus="sub1" href="#"><i class="ion-ios-gear-outline"></i><em>Configuracion</em></a>      
-    </div>
-</div>
-<!-- Configuracion Submenus -->
-<div class="submenu submenu-dark" id="sub1">
-    <div class="submenu-scroll">         
-        <a ng-show="noEstoyLogeado" href="Login.html" target="_top"><i class="ion-ios-unlocked-outline"></i><em>Iniciar Sesion</em></a>
-        <a ng-show="noEstoyLogeado" href="Register.html" target="_top"><i class="ion-ios-unlocked-outline"></i><em>Registrar</em></a>          
-        <a ng-show="estoyLogeado" ng-click="logOut()" href="#" class="logOutButtonJWClass" ><i class="ion-ios-locked-outline"></i><em>Cerrar Sesion</em></a>
-        <a href="Ayuda.html" target="_top"><i class="ion-help"></i><em>Ayuda</em></a>        
-    </div>
-</div>
-            
-<div id="page-content" class="header-clear">
+
+
+
+    
+<div id="page-content" class="page-content header-clear">
     <div id="page-content-scroll">
         
+       <div class="content">
+            <div class="one-half-responsive">
+                <div class="container no-bottom">
+                    <div class="contact-form no-bottom"> 
 
-            <div class="clear"></div>
-            
-
-        <div class="decoration decoration-margins"></div>
-        
-        <div class="content full-top">
-
-                <div ng-show="muestraFiltroCategoria">{{categoriaName}}</div>
-                <div ng-show="muestraFiltroTitulo">{{titulo}}</div>
-
-                <a href="Ver-anuncio.html" target="_top" ng-repeat="x in records" ng-click="saveAdd(x)">
-                        <img style="max-width: 4rem; height: auto;" class="preload-image" data-original={{x.img.url}} alt="img" src={{x.img.url}}>
-                        <strong>{{x.titulo}}</strong>
-                        <em>{{x.description}}</em>
-                        <u><i class="ion-ios-location"></i> {{x.city}} <i class="ion-social-euro"></i> {{x.presupuesto}}<i class="ion-person"> {{x.autor}}</i></u>
-                </a>  
-
-            <div class="thumb-layout thumb-layout-page">
-
-               
-                
+                        <form action="" method="post" class="contactForm" id="contactForm">
+                            <fieldset>
+                                <div class="formFieldWrap">
+                                    <label class="field-title contactNameField" for="contactNameField">Presupuesto:<span>(required)</span></label>
+                                    <input type="number" ng-model="data.presupuesto" name="contactNameField" value="" class="contactField requiredField" id="contactNameField"/>
+                                </div>
+                                <div class="formTextareaWrap">
+                                        <label class="field-title contactMessageTextarea" for="contactMessageTextarea">Descripcion: <span>(required)</span></label>
+                                        <textarea name="contactMessageTextarea" ng-model="data.description" class="contactTextarea requiredField" id="contactMessageTextarea"></textarea>
+                                </div>
+                                <a href="#" ng-click="proponer()" class="button button-green" style="display: block;margin: auto;">{{accion}}</a>
+                            </fieldset>
+                        </form>       
+                    </div>
+                </div>
             </div>
-            <div class="decoration"></div>
-            <button ng-click="nextAds()">Load More</button>
-            <a href="#" ng-click="nextAds()" class="load-more-thumbs button button-full button-green half-bottom">Load More</a>
-        </div> 
+            
+        </div>
         
         <div class="decoration decoration-margins"></div>
         
@@ -143,7 +117,7 @@
         <div class="clear"></div>
     </div>
 </div>
-<a href="Publish Ad 1.html" class="back-to-top-badge"><i class="ion-ios-plus-empty"></i></a>
+ 
     
 </div>
 </body>

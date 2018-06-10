@@ -20,7 +20,12 @@ app.controller('logInCtrl', function ($scope, $http) {
             if (correct) {
                 $(location).attr('href', './index.html', '_top');
             } else {
-                alert('mostrar al usuario que algo ha salido mal a la hora de hacer un log in d');
+                $.iaoAlert({
+                    msg: "Revise bien el usuario y la contraseña.",
+                    type: "error",
+                    position: 'top-left'
+        
+                  })
             }
         });
     }

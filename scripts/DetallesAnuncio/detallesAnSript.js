@@ -30,6 +30,10 @@ $scope.onlyEmpresaWithOutCredits = false;
                             $scope.$apply();
                         }
                     })
+                    
+                    $scope.credits = complet.credits;
+                    console.log(complet.credits);
+                    $scope.$apply();
                     if (empres && 0 >= complet.credits){
 		                $scope.onlyEmpresa = false;
 		                $scope.onlyEmpresaWithOutCredits = true;

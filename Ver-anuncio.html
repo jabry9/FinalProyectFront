@@ -20,6 +20,8 @@
         <div class="page-preloader page-preloader-dark">     
             <div class="spinner"></div> 
         </div>      
+
+      
         <div class="header header-dark">     
             <a href="index.html" target="_top" class="header-logo">NOM<span class="color-red-dark">BRE</span></a>     
             <a href="index.html" target="_top" class="header-icon header-icon-1 menu-bar-text-1 open-sidebar"><i class="ion-ios-arrow-left"></i></a> 
@@ -27,7 +29,11 @@
         <div id="page-content" class="page-content header-clear">     
             <div id="page-content-scroll">                  
                 <div style="margin-bottom: 20px">                      
-                    
+                        <div ng-show="onlyEmpresa">
+                                <h4>
+                                    Credits left: {{credits}}
+                                </h4>
+                            </div>
                 </div>                       
                 <div class="content-fullscren">             
                     <div class="store-slider no-bottom">                 

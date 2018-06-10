@@ -17,76 +17,65 @@
 <script type="text/javascript" src="scripts/plugins.js"></script>
 <script type="text/javascript" src="scripts/custom.js"></script>
 <script type="text/javascript" src="scripts/ownCustomCode.js"></script>
-<script type="text/javascript" src="scripts/ownCustomCodeFront.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
-<script type="text/javascript" src="scripts/AngularFile.js"></script>
+<script type="text/javascript" src="scripts/MisSolicitudes/misSolicitudesScript.js"></script>
 </head>
 
 <body>
-<div id="page-transitions">
+<div id="page-transitions" ng-app="misSolicitudesApp" ng-controller="misSolicitudesCtrl">
     
 <div class="page-preloader page-preloader-dark">
     <div class="spinner"></div>
 </div>
     
 <div class="header header-dark">
-    <a href="index.html" class="header-logo">SOLIC<span class="color-red-dark">ITUDES</span></a>
-    <a href="#" class="header-icon header-icon-1 open-all-sidebar">
+    <a href="Mis-anuncios.html" target="_top" class="header-logo">SOLIC<span class="color-red-dark">ITUDES</span></a>
+    <a  href="Mis-anuncios.html" target="_top" class="header-icon header-icon-1 open-all-sidebar">
         <i class="ion-ios-arrow-left"></i>  
     </a>
 </div>
     
-<!-- Main Small Icon Sidebar -->
-<div class="sidebar-menu sidebar-dark">
-    <div class="sidebar-menu-scroll">
-        <a href="index.html"><i class="ion-ios-star-outline"></i><em>Actualizar</em></a>       
-        <a href="Publish Ad 1.html"><i class="ion-ios-list-outline"></i><em>Publicar</em></a>       
-        <a href="profile.html"><i class="ion-ios-person-outline"></i><em>Mi Perfil</em></a>      
-        <a href="Mis-mensajes.html"><i class="ion-ios-email-outline"></i><em>Mensajes</em></a>       
-        <a href="Mis-anuncios.html"><i class="ion-ios-compose-outline"></i><em>Mis Anuncios</em></a>
-        <a class="current-menu" href="Solicitudes.html"><i class="ion-ios-cart-outline"></i><em>Solicitudes</em></a>
-        <a href="Mis-favoritos.html"><i class="ion-ios-star-outline"></i><em>Mis Favoritos</em></a>       
-        <a data-submenus="sub1" href="#"><i class="ion-ios-gear-outline"></i><em>Configuracion</em></a>
-    </div>
-</div>
 
-<!-- Configuracion Submenus -->
-<div class="submenu submenu-dark" id="sub1">
-    <div class="submenu-scroll">
-        <a class="close-sidebar" href="#"><i class="ion-ios-close-empty"></i><em>Cerrar</em></a>              
-        <a href="Login.html"><i class="ion-ios-unlocked-outline"></i><em>Iniciar Sesion</em></a>
-        <a href="Register.html"><i class="ion-ios-unlocked-outline"></i><em>Registrar</em></a>          
-        <a href="Notificacion.html"><i class="ion-ios-bell-outline"></i><em>Notificaciones</em></a>
-        <a href="#" class="logOutButtonJWClass" ><i class="ion-ios-locked-outline"></i><em>Cerrar Sesion</em></a>
-        <a href="#"><i class="ion-help"></i><em>Ayuda</em></a>        
-        <a class="close-sidebar" href="#"><i class="ion-ios-close-empty"></i><em>Cerrar</em></a>  
-    </div>
-</div>
 
     
 <div id="page-content" class="header-clear">
     <div id="page-content-scroll">
         <div class="decoration decoration-margins"></div>
 
+
         <div class="content">
-            <div class="page-userlist">
-                <div class="user-list-1">
-                    <img data-original="images/pictures/1t.jpg" alt="img" class="preload-image" src="images/empty.png">
-                    <strong>John Doe</strong>
-                    <a href="Ver Solicitud.html" class="bg-green-dark"><i class="ion-ios-chatbubble-outline"></i></a>
-                    <!-- <a href="Ver Solicitud.html" class="bg-green-dark"><i class="ion-ios-telephone-outline"></i></a> -->
-                </div>                
-                <div class="user-list-1">
-                    <img data-original="images/pictures/2t.jpg" alt="img" class="preload-image" src="images/empty.png">
-                    <strong>Alex Apple</strong>
-                    <a href="Ver Solicitud.html" class="bg-green-dark"><i class="ion-ios-chatbubble-outline"></i></a>
-                </div>
-                <div class="user-list-1 no-bottom">
-                    <img data-original="images/pictures/3t.jpg" alt="img" class="preload-image" src="images/empty.png">
-                    <strong>Marcus Red</strong>
-                    <a href="Ver Solicitud.html" class="bg-green-dark"><i class="ion-ios-chatbubble-outline"></i></a>
-                </div>
-            </div>        
+            <div class="portfolio-adaptive portfolio-adaptive-one">
+
+
+                <div style="border: 1px solid black; box-shadow: 2px 2px 20px 2px grey; margin-top: 20px; padding: 5px;" class="portfolio-item" ng-repeat="x in misSolicitudes">
+                       
+                        <img ng-show="x.empresa.logo != null" style="width: 300px; border-radius: 100%" data-original={{x.empresa.logo}} alt="img" class="preload-image" src={{x.empresa.logo}}/>
+                        <strong>{{x.empresa.name}}</strong>
+                        <strong>{{x.empresa.telephone}}</strong>
+                    
+                    <div style="margin-left: 20px;">
+                        <h4>Presupuesto: {{x.presupuesto}}</h4>
+                        Descipcion:
+                        <p>
+                            {{x.description}}
+                        </p>
+                    </div>
+                    <div>
+                        <strong>Nombre: {{x.empresa.name}}</strong> <br>
+                        <strong>Telefono: {{x.empresa.telephone}}</strong>
+
+                    </div>
+                    <!-- <button style="width: 90%; margin-left: 5%; margin-right: 5%; text-align: center" ng-show="x.solicitudes.length != 0" ng-click="misSolicitudes(x.id)" class="button button-green">Solicitudes</button> -->
+                    <!-- <button style="width: 90%; margin-left: 5%; margin-right: 5%; text-align: center" ng-show="x.solicitudes.length == 0" disabled class="button button-red">Aun no tiene Solicitudes</button> -->
+                </div>                                              
+            </div>  
+
+            
+
+           
+
+
+                   
         </div>
         
        
@@ -105,33 +94,7 @@
     
 <div class="share-bottom share-dark">
     <h3>Share Page</h3>
-    <div class="ion-android-search">
-        <a href="https://www.facebook.com/sharer/sharer.php?u=http://www.themeforest.net/">
-            <i class="ion-social-facebook-outline icon-ghost facebook-bg"></i>
-            Facebook
-        </a>
-        <a href="https://twitter.com/home?status=Check%20out%20ThemeForest%20http://www.themeforest.net">
-            <i class="ion-social-twitter-outline twitter-bg"></i>
-            Twitter
-        </a>
-        <a href="https://plus.google.com/share?url=http://www.themeforest.net">
-            <i class="ion-social-googleplus-outline icon-ghost google-bg"></i>
-            Google
-        </a>
-        <a href="https://pinterest.com/pin/create/button/?url=http://www.themeforest.net/&media=https://0.s3.envato.com/files/63790821/profile-image.jpg&description=Themes%20and%20Templates">
-            <i class="ion-social-pinterest-outline icon-ghost pinterest-bg"></i>
-            Pinterest
-        </a>
-        <a href="sms:">
-            <i class="ion-ios-chatboxes-outline icon-ghost sms-bg"></i>
-            Text
-        </a>
-        <a href="mailto:?&subject=Check this page out!&body=http://www.themeforest.net">
-            <i class="ion-ios-email-outline icon-ghost mail-bg"></i>
-            Email
-        </a>
-        <div class="clear"></div>
-    </div>
+
 </div>
  
     

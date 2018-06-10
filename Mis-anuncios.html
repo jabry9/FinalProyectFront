@@ -38,25 +38,23 @@
 <div id="page-content" class="header-clear">
     <div id="page-content-scroll"> 
 
-        <div class="portfolio-adaptive-controls">
-            <h4>Cambio Vista</h4>                        
-            <a class="portfolio-switch adaptive-three" href="#"><i class="ion-ios-keypad"></i></a>
-            <a class="portfolio-switch adaptive-two" href="#"><i class="ion-ios-pause"></i></a>
-            <a class="portfolio-switch adaptive-one active-adaptive" href="#"><i class="ion-navicon"></i></a>
-            <div class="clear"></div>
-        </div>
+
           
         <div class="content">
             <div class="portfolio-adaptive portfolio-adaptive-one">
 
 
-                <div class="portfolio-item" ng-repeat="x in misAnuncios">
-                    <a class="show-gallery" href="images/pictures/1.jpg" title="Caption here!"><img data-original={{x.multimedia[0].url}} alt="img" class="preload-image responsive-image" src={{x.multimedia[0].url}}></a>
-                    <h4>{{x.titulo}}</h4>
-                    <p>
-                        {{x.description}}
-                        <a href="#" class="adaptive-more right-text">Edit <i class="ion-link"></i></a>
-                    </p>
+                <div style="border: 1px solid black; box-shadow: 2px 2px 20px 2px grey; margin-top: 20px;" class="portfolio-item" ng-repeat="x in misAnuncios">
+                    <a class="show-gallery" href={{x.multimedia[0].url}} title="Caption here!"><img data-original={{x.multimedia[0].url}} alt="img" class="preload-image responsive-image" src={{x.multimedia[0].url}}></a>
+                    <div style="margin-left: 20px;">
+                        <h4>{{x.titulo}}</h4>
+                        <p>
+                            {{x.description}}
+                        </p>
+                    </div>
+                    
+                    <button style="width: 90%; margin-left: 5%; margin-right: 5%; text-align: center" ng-show="x.solicitudes.length != 0" ng-click="misSolicitudes(x.id)" class="button button-green">Solicitudes</button>
+                    <button style="width: 90%; margin-left: 5%; margin-right: 5%; text-align: center" ng-show="x.solicitudes.length == 0" disabled class="button button-red">Aun no tiene Solicitudes</button>
                 </div>                                              
             </div>  
         </div>

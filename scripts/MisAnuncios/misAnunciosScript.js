@@ -13,10 +13,12 @@ app.controller('misAnunciosCtrl', function ($scope, $http) {
     $http.get(direction+"Anuncios/getMyAds?access_token="+getCookieAccesToken())
     .then(function(response) {
         $scope.misAnuncios = response.data;
-        console.log(response.data)
-        /*response.data.map(e => {
-            $scope.categories.push({cat: e.name, val: e.id});
-        });*/
+
     });
 
+    $scope.misSolicitudes = function (anuncioId) {
+
+            sessionStorage.setItem('anuncioSolicitudes', anuncioId);
+            $(location).attr('href', './Solicitudes.html', '_top');
+    }
 });

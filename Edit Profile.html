@@ -19,47 +19,23 @@
 <script type="text/javascript" src="scripts/ownCustomCode.js"></script>
 <script type="text/javascript" src="scripts/ownCustomCodeFront.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
-<script type="text/javascript" src="scripts/AngularFile.js"></script>
+<script type="text/javascript" src="scripts/EditProfiler/editProfilerScript.js"></script>
 </head>
 
 <body>
-<div id="page-transitions">
+<div id="page-transitions" ng-app="editProfilerApp" ng-controller="editProfilerCtrl">
     
 <div class="page-preloader page-preloader-dark">
     <div class="spinner"></div>
 </div>
     
 <div class="header header-dark">
-    <a href="index.html" class="header-logo">EDITAR<span class="color-red-dark">PERFIL</span></a>
-    <a href="profile.html" class="header-icon header-icon-1 menu-bar-text-1"><i class="ion-ios-arrow-left"></i></a>
-    <a href="#" class="header-icon header-icon-4"><i class="ion-android-done"></i></a>
+    <a href="index.html" target="_top" class="header-logo">EDITAR<span class="color-red-dark">PERFIL</span></a>
+    <a href="index.html" target="_top" class="header-icon header-icon-1 menu-bar-text-1"><i class="ion-ios-arrow-left"></i></a>
+    <a href="#" ng-click="guardaUser()"  class="header-icon header-icon-4"><i class="ion-android-done"></i></a>
 </div>
     
-<!-- Main Small Icon Sidebar -->
-<div class="sidebar-menu sidebar-dark">
-    <div class="sidebar-menu-scroll">
-        <a href="index.html"><i class="ion-ios-star-outline"></i><em>Actualizar</em></a>       
-        <a href="Publish Ad 1.html"><i class="ion-ios-list-outline"></i><em>Publicar</em></a>       
-        <a class="current-menu" href="profile.html"><i class="ion-ios-person-outline"></i><em>Mi Perfil</em></a>      
-        <a href="Mis-mensajes.html"><i class="ion-ios-email-outline"></i><em>Mensajes</em></a>       
-        <a href="Mis-anuncios.html"><i class="ion-ios-compose-outline"></i><em>Mis Anuncios</em></a>
-        <a href="Solicitudes.html"><i class="ion-ios-cart-outline"></i><em>Solicitudes</em></a>
-        <a href="Mis-favoritos.html"><i class="ion-ios-star-outline"></i><em>Mis Favoritos</em></a>       
-        <a data-submenus="sub1" href="#"><i class="ion-ios-gear-outline"></i><em>Configuracion</em></a>      
-    </div>
-</div>
-<!-- Configuracion Submenus -->
-<div class="submenu submenu-dark" id="sub1">
-    <div class="submenu-scroll">
-        <a class="close-sidebar" href="#"><i class="ion-ios-close-empty"></i><em>Cerrar</em></a>              
-        <a href="Login.html"><i class="ion-ios-unlocked-outline"></i><em>Iniciar Sesion</em></a>
-        <a href="Register.html"><i class="ion-ios-unlocked-outline"></i><em>Registrar</em></a>          
-        <a href="Notificacion.html"><i class="ion-ios-bell-outline"></i><em>Notificaciones</em></a>
-        <a href="#" class="logOutButtonJWClass" ><i class="ion-ios-locked-outline"></i><em>Cerrar Sesion</em></a>
-        <a href="#"><i class="ion-help"></i><em>Ayuda</em></a>        
-        <a class="close-sidebar" href="#"><i class="ion-ios-close-empty"></i><em>Cerrar</em></a>
-    </div>
-</div>
+
             
 <div id="page-content" class="header-clear">
     <div id="page-content-scroll"> 
@@ -69,44 +45,23 @@
 
         <div class="one-half-responsive">
             <div class="content">
+                <img src={{usuario.photo}} style="max-width: 200px; border-radius: 100%;" alt="" srcset="">
                 <div class="input-icon">
-                    Cambiar imagen: 
-                    <input type="file" class="input-text-box input-green-border" value="Nombre">
+                    Foto: 
+                    <input type="file" class="input-text-box input-green-border" ng-model="fileToUp" onchange="angular.element(this).scope().selecionada(this)" accept="image/*" name="img">
                 </div>
                 <div class="input-icon">
-                    <input type="text" class="input-text-box input-green-border" value="Nombre">
+                    <input type="text" class="input-text-box input-green-border" ng-model="usuario.name" placeholder="Nombre">
                     <i class="ion-person"></i>
                 </div>
                 <div class="input-icon">
-                        <input type="text" class="input-text-box input-green-border" value="Ubicacion">
-                        <i class="ion-ios-location"></i>
+                        <input type="number" class="input-text-box input-green-border" ng-model="usuario.telephone" placeholder="telephone">
+                        <i class="ion-ios-telephone"></i>
                 </div>
-                <div class="input-icon">
-                        <input type="text" class="input-text-box input-green-border" value="Sexo">
-                        <i class="ion-transgender"></i>
-                </div>
-                <div class="select-box">
-                        <select >
-                            <option class="select-title" value="o0">Todas Las Categorias</option>
-                            <option value="o1">Option 1</option>
-                            <option value="o2">Option 2</option>
-                            <option value="o3">Option 3</option>
-                            <option value="o4">Option 4</option>
-                        </select>
-                </div>
-                <div class="select-box">
-                        <select>
-                            <option class="select-title" value="o0">SubCategorias</option>
-                            <option value="o1">Option 1</option>
-                            <option value="o2">Option 2</option>
-                            <option value="o3">Option 3</option>
-                            <option value="o4">Option 4</option>
-                        </select>
-                </div>
-                <div class="input-icon">
-                        <input type="submit" style="background-color: #c0392b" class="input-text-box input-red-border" value="Guardar">
-                        <i class="ion-android-done"></i>
-                </div>
+
+                <a href="CreateUpdateEmpresa.html" target="_top" class="input-icon">
+                        <input type="submit" style="background-color: blue; color: aliceblue" class="input-text-box input-red-border" value={{action.name}}>
+                </a>
             </div>
         </div>
         <div class="clear"></div>

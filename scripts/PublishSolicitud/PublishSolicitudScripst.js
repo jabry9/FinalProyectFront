@@ -1,107 +1,68 @@
-var app = angular.module('publishUpdateAd1App', []);
+var app = angular.module('publishSolicitudApp', []);
 
-app.controller('publishUpdateAd1Ctrl', function ($scope, $http) {
+app.controller('publishSolicitudCtrl', function ($scope, $http) {
 
-    $scope.categories = [];
-    $scope.bread = [];
-    $scope.bread.push(0);
-    $scope.oldI = 0;
-    $scope.currentCat = 'Toda las categorias';
-    $scope.materialsINC = false;
-
-    currentLocation();
-    alredyLogged(function(isLogged){
-        if (!isLogged)
-        $(location).attr('href', './index.html', '_top');
-    });
-
-    $http.get(direction+"Categories/getByParentCategory?parentCategory=0")
-    .then(function(response) {
-        response.data.map(e => {
-            $scope.categories.push({cat: e.name, val: e.id});
-        });
-    });
-
-
-    $scope.publicaAd = function() {
-
-        $scope.anuncio.location = {
-            lat: coord.coords.latitude,
-            lng: coord.coords.longitude
-          };
-        $scope.anuncio.categoriaId = $scope.item;
-        $scope.anuncio.materialsINC = $scope.materialsINC;
-
-        console.log($scope.anuncio, $scope.materialsINC);
-        /*insertOrUpdate('POST', $scope.anuncio, function(good){
-            if (good){
-                alert('insertado con exito');
-                $(location).attr('href', './Publish Ad 2.html', '_top');
-            }
-            else
-                alert('algo ha salido mal');
-        });*/
-
+    $scope.accion = 'Proponer Presupuesto';
+    $scope.accionType = 'POST';
+    $scope.data = {
+        presupuesto: 0,
+        description: '',
+        anuncioId: sessionStorage.getItem("anuncioSelecionado")
     };
 
+    if (null !== sessionStorage.getItem("anuncioSelecionado")){
+        $scope.anuncioId = sessionStorage.getItem("anuncioSelecionado");
 
-    $scope.back = function() {
-        if ($scope.bread.length > 2){
-            const cate = parseInt($scope.bread.shift());
-            $scope.currentCat = $scope.categories.filter(function( obj ) {
-                return obj.val == cate;
-              });
-              $scope.currentCat = $scope.currentCat[0].cat;
-            $http.get(direction+"Categories/getByParentCategory?parentCategory="+cate)
-            .then(function(response) {
-                if (0 !== response.data.length) {
-                    $scope.categories = [];
-                    response.data.map(e => {
-                        $scope.categories.push({cat: e.name, val: e.id});
-                    });
-                }
-            });
-        }else if ($scope.bread.length === 2){
-            $scope.currentCat = 'Toda las categorias';
-            $http.get(direction+"Categories/getByParentCategory?parentCategory=0")
-            .then(function(response) {
-                if (0 !== response.data.length) {
-                    $scope.categories = [];
-                    response.data.map(e => {
-                        $scope.categories.push({cat: e.name, val: e.id});
-                    });
-                }
-            });
-        }
-     }
+        alredyLogged(function(isLogged){
+            if (isLogged){
+                alReadyHaveSolicitud($scope.anuncioId, function(already){
+                    if (false != already){
+                        $scope.accion = 'Modificar Presupuesto';
+                        $scope.accionType = 'PUT';
+                        $scope.data.id = already.Solicitud.id;
+                        $scope.data.presupuesto = already.Solicitud.presupuesto;
+                        $scope.data.description = already.Solicitud.description;
+                        $scope.data.empresaId = already.Solicitud.empresaId;
+                        $scope.$apply();
+                    }
+                })
+            }else{
+                $(location).attr('href', './index.html', '_top');
+            }
+        });
+    }else {
+        $(location).attr('href', './index.html', '_top');
+    }
 
-    $scope.update = function() {
-        if (null != $scope.item){
-            $scope.currentCat = $scope.categories.filter(function( obj ) {
-                return obj.val == $scope.item;
-              });
-              $scope.currentCat = $scope.currentCat[0].cat;
-            $http.get(direction+"Categories/getByParentCategory?parentCategory="+parseInt($scope.item))
-            .then(function(response) {
-                
-                if (0 !== response.data.length) {
-                    $scope.bread.unshift($scope.oldI);
-                    $scope.oldI = $scope.item;
-                    $scope.categories = [];
-                    response.data.map(e => {
-                        $scope.categories.push({cat: e.name, val: e.id});
-                    });
-                }
-            });
-        }
-     }
-})
+    $scope.proponer = function() {
+        insertOrUpdate($scope.accionType, $scope.data, function(good){
+            if (good) {
+                alert('mostrar que se ha creado correcto');
+                $(location).attr('href', './index.html', '_top');
+            }else {
+                alert('mostrar que algo ha fallado');
+            }
+            
+        })
+    };
+
+});
+
+const alReadyHaveSolicitud = (anuncioId, cb) =>{
+    $.get(direction+"Solicituds/getIfSolicitudIsMy?anuncioId="+anuncioId+"&access_token="+getCookieAccesToken())
+    .then(function(data) {
+        cb(data);
+    })
+    .fail(function(){
+        cb(false);
+    });
+}
 
 const insertOrUpdate = (actionType, data, cb) => {
 
     $.ajax({
         type: actionType,
-        url: direction+"Anuncios?access_token="+getCookieAccesToken(),
+        url: direction+"Solicituds?access_token="+getCookieAccesToken(),
         contentType: 'application/json',
         data: JSON.stringify(data),
     }).done(function () {

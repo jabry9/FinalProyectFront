@@ -76,12 +76,17 @@
         <div class="content full-top">
             <div class="thumb-layout">
 
-                <div ng-show="muestraFiltroCategoria">{{categoriaName}}</div>
-                <div ng-show="muestraFiltroTitulo">{{titulo}}</div>
+                <div class="profile-page-2-header">
+                    <h1 ng-show="muestraFiltroCategoria">Categoria: {{categoriaName}}</h1> 
+                    <h1 ng-show="muestraFiltroTitulo">Titulo: {{titulo}}</h1>
+                </div>
+               
 
                 <a href="Ver-anuncio.html" target="_top" style="margin-bottom: 40px; height: 120px; padding: 10px;" ng-repeat="x in records" ng-click="saveAdd(x)">
                     
-                    
+                        
+                        <hr style="border: 1px solid black; box-shadow: 2px 2px 20px 2px grey;">
+                        <br>
                     <div class="card" style="width: 18rem;">
                         <img class="card-img-top" style="max-height: 100px;" src={{x.img.url}} alt="Card image cap">
                         <div class="card-body">
@@ -93,8 +98,7 @@
                             <u><i class="ion-ios-location"></i> {{x.city}}</u>
                         </div>
                       </div>
-                      <br>
-                      <hr style="border: 1px solid black; box-shadow: 2px 2px 20px 2px grey;">
+                     
 
                 </a>  
 
@@ -115,14 +119,7 @@
                 Simplicity and complexity packed into a beautiful, 
                 feature filled, powerful, gorgeous mobile template.
             </p>
-            <div class="footer-socials">
-                <a href="#" class="icon icon-round icon-ghost icon-xs facebook-bg"><i class="ion-social-facebook"></i></a>
-                <a href="#" class="icon icon-round icon-ghost icon-xs twitter-bg"><i class="ion-social-twitter"></i></a>
-                <a href="#" class="icon icon-round icon-ghost icon-xs google-bg"><i class="ion-social-googleplus"></i></a>
-                <a href="#" class="icon icon-round icon-ghost icon-xs phone-bg"><i class="ion-ios-telephone"></i></a>
-                <a href="#" class="icon icon-round icon-ghost icon-xs show-share-bottom border-magenta-dark"><i class="ion-android-share"></i></a>
-                <a href="#" class="icon icon-round icon-ghost icon-xs back-to-top border-blue-light"><i class="ion-arrow-up-b"></i></a>
-            </div>
+            
             <div class="decoration"></div>
             <p class="copyright-text">Copyright <span id="copyright-year"></span>. All Rights Reserved.</p>
         </div>

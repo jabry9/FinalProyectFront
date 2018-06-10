@@ -19,47 +19,21 @@
 <script type="text/javascript" src="scripts/ownCustomCode.js"></script>
 <script type="text/javascript" src="scripts/ownCustomCodeFront.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
-<script type="text/javascript" src="scripts/AngularFile.js"></script>
+<script type="text/javascript" src="scripts/MisAnuncios/misAnunciosScript.js"></script>
 </head>
 
 <body>
-<div id="page-transitions">
+<div id="page-transitions" ng-app="misAnunciosApp" ng-controller="misAnunciosCtrl">
     
 <div class="page-preloader page-preloader-dark">
     <div class="spinner"></div>
 </div>
     
 <div class="header header-dark">
-    <a href="index.html" class="header-logo">ANUN<span class="color-red-dark">CIOS</span></a>
-    <a href="#" class="header-icon header-icon-1 menu-bar-text-1 open-sidebar"><i class="ion-ios-arrow-left"></i></a>
+    <a href="index.html" target="_top"  class="header-logo">ANUN<span class="color-red-dark">CIOS</span></a>
+    <a href="index.html" target="_top" class="header-icon header-icon-1 menu-bar-text-1 open-sidebar"><i class="ion-ios-arrow-left"></i></a>
 </div>
     
-<!-- Main Small Icon Sidebar -->
-<div class="sidebar-menu sidebar-dark">
-    <div class="sidebar-menu-scroll">
-        <a href="index.html"><i class="ion-ios-star-outline"></i><em>Actualizar</em></a>       
-        <a href="Publish Ad 1.html"><i class="ion-ios-list-outline"></i><em>Publicar</em></a>       
-        <a href="profile.html"><i class="ion-ios-person-outline"></i><em>Mi Perfil</em></a>      
-        <a href="Mis-mensajes.html"><i class="ion-ios-email-outline"></i><em>Mensajes</em></a>       
-        <a class="current-menu" href="Mis-anuncios.html"><i class="ion-ios-compose-outline"></i><em>Mis Anuncios</em></a>
-        <a href="Solicitudes.html"><i class="ion-ios-cart-outline"></i><em>Solicitudes</em></a>
-        <a href="Mis-favoritos.html"><i class="ion-ios-star-outline"></i><em>Mis Favoritos</em></a>       
-        <a data-submenus="sub1" href="#"><i class="ion-ios-gear-outline"></i><em>Configuracion</em></a>
-    </div>
-</div>
-
-<!-- Configuracion Submenus -->
-<div class="submenu submenu-dark" id="sub1">
-    <div class="submenu-scroll">
-        <a class="close-sidebar" href="#"><i class="ion-ios-close-empty"></i><em>Cerrar</em></a>              
-        <a href="Login.html"><i class="ion-ios-unlocked-outline"></i><em>Iniciar Sesion</em></a>
-        <a href="Register.html"><i class="ion-ios-unlocked-outline"></i><em>Registrar</em></a>          
-        <a href="Notificacion.html"><i class="ion-ios-bell-outline"></i><em>Notificaciones</em></a>
-        <a href="#" class="logOutButtonJWClass"><i class="ion-ios-locked-outline"></i><em>Cerrar Sesion</em></a>
-        <a href="#"><i class="ion-help"></i><em>Ayuda</em></a>        
-        <a class="close-sidebar" href="#"><i class="ion-ios-close-empty"></i><em>Cerrar</em></a>  
-    </div>
-</div>
             
 <div id="page-content" class="header-clear">
     <div id="page-content-scroll"> 
@@ -74,60 +48,16 @@
           
         <div class="content">
             <div class="portfolio-adaptive portfolio-adaptive-one">
-                <div class="portfolio-item">
-                    <a class="show-gallery" href="images/pictures/1.jpg" title="Caption here!"><img data-original="images/pictures/1.jpg" alt="img" class="preload-image responsive-image" src="images/empty.png"></a>
-                    <h4>Item 1</h4>
+
+
+                <div class="portfolio-item" ng-repeat="x in misAnuncios">
+                    <a class="show-gallery" href="images/pictures/1.jpg" title="Caption here!"><img data-original={{x.multimedia[0].url}} alt="img" class="preload-image responsive-image" src={{x.multimedia[0].url}}></a>
+                    <h4>{{x.titulo}}</h4>
                     <p>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam semper 
-                        semper tellus. Ut arcu turpis, dignissim sed tortor sed, posuere.
+                        {{x.description}}
                         <a href="#" class="adaptive-more right-text">Edit <i class="ion-link"></i></a>
                     </p>
-                </div>                        
-                <div class="portfolio-item">
-                    <a class="show-gallery" href="images/pictures/2.jpg" title="Caption here!"><img data-original="images/pictures/2.jpg" alt="img" class="preload-image responsive-image" src="images/empty.png"></a>
-                    <h4>Item 2</h4>
-                    <p>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam semper 
-                        semper tellus. Ut arcu turpis, dignissim sed tortor sed, posuere.
-                        <a href="#" class="adaptive-more right-text">Edit <i class="ion-link"></i></a>
-                    </p>
-                </div>                         
-                <div class="portfolio-item">
-                    <a class="show-gallery" href="images/pictures/3.jpg" title="Caption here!"><img data-original="images/pictures/3.jpg" alt="img" class="preload-image responsive-image" src="images/empty.png"></a>
-                    <h4>Item 3</h4>
-                    <p>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam semper 
-                        semper tellus. Ut arcu turpis, dignissim sed tortor sed, posuere.
-                        <a href="#" class="adaptive-more right-text">Edit <i class="ion-link"></i></a>
-                    </p>
-                </div>                         
-                <div class="portfolio-item">
-                    <a class="show-gallery" href="images/pictures/4.jpg" title="Caption here!"><img data-original="images/pictures/4.jpg" alt="img" class="preload-image responsive-image" src="images/empty.png"></a>
-                    <h4>Item 4</h4>
-                    <p>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam semper 
-                        semper tellus. Ut arcu turpis, dignissim sed tortor sed, posuere.
-                        <a href="#" class="adaptive-more right-text">Edit <i class="ion-link"></i></a>
-                    </p>
-                </div>                        
-                <div class="portfolio-item">
-                    <a class="show-gallery" href="images/pictures/5.jpg" title="Caption here!"><img data-original="images/pictures/5.jpg" alt="img" class="preload-image responsive-image" src="images/empty.png"></a>
-                    <h4>Item 5</h4>
-                    <p>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam semper 
-                        semper tellus. Ut arcu turpis, dignissim sed tortor sed, posuere.
-                        <a href="#" class="adaptive-more right-text">Edit <i class="ion-link"></i></a>
-                    </p>
-                </div>                         
-                <div class="portfolio-item no-bottom">
-                    <a class="show-gallery" href="images/pictures/6.jpg" title="Caption here!"><img data-original="images/pictures/6.jpg" alt="img" class="preload-image responsive-image" src="images/empty.png"></a>
-                    <h4>Item 6</h4>
-                    <p class="no-bottom">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam semper 
-                        semper tellus. Ut arcu turpis, dignissim sed tortor sed, posuere.
-                        <a href="#" class="adaptive-more right-text">Edit <i class="ion-link"></i></a>
-                    </p>
-                </div>                        
+                </div>                                              
             </div>  
         </div>
     
@@ -140,14 +70,6 @@
                 Simplicity and complexity packed into a beautiful, 
                 feature filled, powerful, gorgeous mobile template.
             </p>
-            <div class="footer-socials">
-                <a href="#" class="icon icon-round icon-ghost icon-xs facebook-bg"><i class="ion-social-facebook"></i></a>
-                <a href="#" class="icon icon-round icon-ghost icon-xs twitter-bg"><i class="ion-social-twitter"></i></a>
-                <a href="#" class="icon icon-round icon-ghost icon-xs google-bg"><i class="ion-social-googleplus"></i></a>
-                <a href="#" class="icon icon-round icon-ghost icon-xs phone-bg"><i class="ion-ios-telephone"></i></a>
-                <a href="#" class="icon icon-round icon-ghost icon-xs show-share-bottom border-magenta-dark"><i class="ion-android-share"></i></a>
-                <a href="#" class="icon icon-round icon-ghost icon-xs back-to-top border-blue-light"><i class="ion-arrow-up-b"></i></a>
-            </div>
             <div class="decoration"></div>
             <p class="copyright-text">Copyright <span id="copyright-year"></span>. All Rights Reserved.</p>
         </div>

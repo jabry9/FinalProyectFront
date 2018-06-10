@@ -12,6 +12,7 @@ app.controller('searchCtrl', function ($scope, $http) {
     $scope.searchBar = '';
     $scope.categorySearch = null;
     $scope.currentCat = 'Toda las categorias';
+    $scope.currentCatOld = '';
 
 
         $http.get(direction+"Categories/getByParentCategory?parentCategory=0")
@@ -33,7 +34,6 @@ app.controller('searchCtrl', function ($scope, $http) {
             if ($scope.categorySearch === null)
                 $scope.categorySearch = 0;
 
-
             sessionStorage.setItem("searchCate", $scope.categorySearch);
             sessionStorage.setItem("searchName", $scope.currentCat);
             sessionStorage.setItem("searchBar", $scope.searchBar);
@@ -47,10 +47,11 @@ app.controller('searchCtrl', function ($scope, $http) {
             if ($scope.bread.length > 2){
                 const cate = parseInt($scope.bread.shift());
 
-                $scope.currentCat = $scope.categories.filter(function( obj ) {
-                    return obj.val == cate;
-                  });
-                  $scope.currentCat = $scope.currentCat[0].cat;
+                if ($scope.last)
+                    $scope.currentCat = $scope.currentCatOld;
+                else
+                    $scope.currentCat = $scope.moreOld;
+
 
                 $http.get(direction+"Categories/getByParentCategory?parentCategory="+cate)
                 .then(function(response) {
@@ -62,6 +63,7 @@ app.controller('searchCtrl', function ($scope, $http) {
                     }
                 });
             }else if ($scope.bread.length === 2){
+
                 $scope.currentCat = 'Toda las categorias';
                 $http.get(direction+"Categories/getByParentCategory?parentCategory=0")
                 .then(function(response) {
@@ -77,15 +79,21 @@ app.controller('searchCtrl', function ($scope, $http) {
     
         $scope.update = function() {
 
-            
 
             if (null != $scope.item){
                 $scope.categorySearch = $scope.item;
+
+
+                $scope.moreOld = $scope.currentCatOld;
+
+                $scope.currentCatOld = $scope.currentCat;
 
                 $scope.currentCat = $scope.categories.filter(function( obj ) {
                     return obj.val == $scope.item;
                   });
                   $scope.currentCat = $scope.currentCat[0].cat;
+
+                  $scope.last = false;
 
                 $http.get(direction+"Categories/getByParentCategory?parentCategory="+parseInt($scope.item))
                 .then(function(response) {
@@ -100,6 +108,8 @@ app.controller('searchCtrl', function ($scope, $http) {
                     }
 
                 });
+            }else {
+                $scope.last = true;
             }
 
          }

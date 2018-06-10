@@ -4,7 +4,8 @@ var app = angular.module('indexApp', []);
 app.controller('indexCtrl', function ($scope, $http) {
 
     $scope.records = [];
-    $scope.page = 0;
+    $scope.page = 1;
+    $scope.adsPerPage = 8;
     $scope.muestraFiltroTitulo = false;
     $scope.muestraFiltroCategoria = false;
 
@@ -45,7 +46,7 @@ app.controller('indexCtrl', function ($scope, $http) {
         
     });
 
-setTimeout(function(){    $http.get(direction+"Anuncios/getByPaginatione?page="+$scope.page+"&adsPerPage=15&title="+$scope.titulo+"&category="+$scope.categoria)
+setTimeout(function(){    $http.get(direction+"Anuncios/getByPaginatione?page="+$scope.page+"&adsPerPage="+$scope.adsPerPage+"&title="+$scope.titulo+"&category="+$scope.categoria)
 .then(function(response) {
     response.data.map(e => {
 
@@ -66,7 +67,7 @@ $scope.page++;},50);
 
 
     $scope.nextAds = function () {
-        $http.get(direction+"Anuncios/getByPaginatione?page="+$scope.page+"&adsPerPage=4&title="+$scope.titulo+"&category="+$scope.categoria)
+        $http.get(direction+"Anuncios/getByPaginatione?page="+$scope.page+"&adsPerPage="+$scope.adsPerPage+"&title="+$scope.titulo+"&category="+$scope.categoria)
         .then(function(response) {
             response.data.map(e => {
 var image = e.multimedia[0];

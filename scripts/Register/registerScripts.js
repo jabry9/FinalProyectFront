@@ -17,7 +17,12 @@ app.controller('signInCtrl', function ($scope, $http) {
             if (correct) {
                 $(location).attr('href', './Login.html', '_top');
             } else {
-                alert('mostrar al usuario que algo ha salido mal');
+                $.iaoAlert({
+                    msg: "Revise bien los campos.",
+                    type: "error",
+                    position: 'top-left'
+        
+                  })
             }
         });
     }

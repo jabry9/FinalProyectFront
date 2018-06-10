@@ -32,8 +32,8 @@
                 <div class="content-fullscren">             
                     <div class="store-slider no-bottom">                 
                         <div class="swiper-wrapper">                      
-                            <a ng-repeat="m in anuncio.multimedia" href={{m.url}}  class="swiper-slide store-slider-item show-gallery">                         
-                                <img class="responsive-image no-bottom" alt="img" src={{m.url}} alt="img">                     
+                            <a style="height: 350px; width: 100%" ng-repeat="m in anuncio.multimedia" href={{m.url}}  class="swiper-slide store-slider-item show-gallery">                         
+                                <img style="position: relative; height: auto; width: 100%" class="responsive-image no-bottom" alt="img" src={{m.url}} alt="img">                     
                             </a>                          
                         </a>                 
                     </div>             
@@ -49,7 +49,15 @@
                         <!-- <img data-original="images/pictures/1.jpg" alt="img" class="preload-image responsive-image"> -->                                           
                         <a href="#"><i class="ion-eye"> {{anuncio.visitas}}</i></a> 
                         <a href="#">Presupuesto: {{anuncio.presupMAX}}</a> 
-                        <a href="#">vacantes: {{anuncio.solicitudes}}</a>                      
+                        <a href="#">vacantes: {{anuncio.solicitudes}}</a>
+                        
+                        <a href="#">Materiales incluidos:</a>
+                        <div class="onoffswitch-2">
+                                
+                                <input value={{anuncio.materialsINC}} type="checkbox" disabled name="onoffswitch" class="onoffswitch-checkbox-2" id="myonoffswitch-2">
+                                <label class="onoffswitch-label-2" for="myonoffswitch-2"></label>
+                            </div>
+
                         <h4 class="page-blog-title">{{anuncio.titulo}}</h4>                                          
                         <div class="page-blog-content">                         
                             <p>                             

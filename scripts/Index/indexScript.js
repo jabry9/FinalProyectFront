@@ -45,7 +45,7 @@ app.controller('indexCtrl', function ($scope, $http) {
         
     });
 
-setTimeout(function(){    $http.get(direction+"Anuncios/getByPaginatione?page="+$scope.page+"&adsPerPage=4&title="+$scope.titulo+"&category="+$scope.categoria)
+setTimeout(function(){    $http.get(direction+"Anuncios/getByPaginatione?page="+$scope.page+"&adsPerPage=15&title="+$scope.titulo+"&category="+$scope.categoria)
 .then(function(response) {
     response.data.map(e => {
 

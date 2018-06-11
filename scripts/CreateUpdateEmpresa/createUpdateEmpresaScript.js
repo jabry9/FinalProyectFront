@@ -7,7 +7,7 @@ app.controller('editProfilerCtrl', function ($scope, $http) {
             $(location).attr('href', './index.html', '_top');
         
     });
-
+    $scope.cargando = true;
     $scope.action = 'Crear';
     $scope.empresa = {
         name: '',
@@ -54,7 +54,6 @@ app.controller('editProfilerCtrl', function ($scope, $http) {
                 data: JSON.stringify($scope.empresa),
             }).done(function (data) {
                 alert('mostrar que se ha Modificado bien');
-                $(location).attr('href', './index.html', '_top');
             }).fail(function (msg) {
                 console.log(msg);
             });
@@ -67,6 +66,9 @@ app.controller('editProfilerCtrl', function ($scope, $http) {
             }).done(function (data) {
                 console.log('Creada');
                 $scope.empresa = data;
+                $scope.cargando = false;
+                $scope.$apply();
+                $(barraDeProgreso).css('width', '0%');
                 $scope.subirIm.send();
 
             }).fail(function (msg) {
@@ -81,18 +83,28 @@ app.controller('editProfilerCtrl', function ($scope, $http) {
     $scope.selecionada = function(t) {
 
         if ($scope.action === 'Modificar'){
+
+            $scope.cargando = false;
+            $scope.$apply();
+            $(barraDeProgreso).css('width', '0%');
+
             const direction2 = direction+'containers/empresa'+$scope.empresa.id;
             up = new uploader(t, {
                 url: direction2+'/upload',
-                progress:function(ev){ 
-                    //console.log('progress'); 
-                    //console.log(((ev.loaded/ev.total)*100)+'%'); 
+                onprogress:function(ev){ 
+                    var a = ((ev.loaded/ev.total)*100);
+                    a = a+'%';
+                    $(barraDeProgreso).css('width', a);
                 },
                 error:function(ev){ 
                     console.log('error'); 
+                    $scope.cargando = true;
+                    $scope.$apply();
                 },
                 success:function(data){ 
                     $scope.empresa.logo = direction2+'/download/'+t.files[0].name;
+                    $scope.cargando = true;
+                    $scope.$apply();
                 }
             });
 
@@ -101,12 +113,15 @@ app.controller('editProfilerCtrl', function ($scope, $http) {
             const direction2 = direction+'containers/empresa'+$scope.empresa.id;
             up = new uploader(t, {
                 url: direction2+'/upload',
-                progress:function(ev){ 
-                    //console.log('progress'); 
-                    //console.log(((ev.loaded/ev.total)*100)+'%'); 
+                onprogress:function(ev){ 
+                    var a = ((ev.loaded/ev.total)*100);
+                    a = a+'%';
+                    $(barraDeProgreso).css('width', a);
                 },
                 error:function(ev){ 
                     console.log('error'); 
+                    $scope.cargando = true;
+                    $scope.$apply();
                 },
                 success:function(data){ 
                     $scope.empresa.logo = direction2+'/download/'+t.files[0].name;
@@ -117,7 +132,8 @@ app.controller('editProfilerCtrl', function ($scope, $http) {
                         data: JSON.stringify($scope.empresa),
                     }).done(function (data) {
                         alert('mostrar que se ha creado bien');
-                        $(location).attr('href', './index.html', '_top');
+                        $scope.cargando = true;
+                        $scope.$apply();
                     }).fail(function (msg) {
                         console.log(msg);
                     });

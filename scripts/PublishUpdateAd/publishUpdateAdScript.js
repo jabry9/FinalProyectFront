@@ -11,6 +11,8 @@ app.controller('publishUpdateAd1Ctrl', function ($scope, $http) {
     $scope.oldI = 0;
     $scope.currentCat = 'Toda las categorias';
     $scope.materialsINC = false;
+    $scope.cargando = true;
+    $scope.allImg = [];
 
     currentLocation();
     alredyLogged(function(isLogged){
@@ -39,6 +41,32 @@ app.controller('publishUpdateAd1Ctrl', function ($scope, $http) {
         });
     }
 
+    $scope.finalizar = function(){
+
+        
+        let a = JSON.stringify(
+            $scope.files.map(file => { 
+                    return {
+                        "anuncioId": sessionStorage.getItem("anuncioInsertado"),
+                        "url": direction2+'/download/'+file.name,
+                        "type": 'IMG'
+                    }
+            })
+        );
+
+        $.ajax({
+            url: direction+'Multimedia',  
+            type: 'POST',
+            contentType: 'application/json',
+            dataType: 'json',
+            data: a,
+            success:function(data){
+                $(location).attr('href', './index.html', '_top');
+            }
+        });
+
+        
+    }
   
       $scope.delete = function (index, id) {
         $.ajax({
@@ -46,6 +74,7 @@ app.controller('publishUpdateAd1Ctrl', function ($scope, $http) {
             type: 'DELETE',
             success:function(data, status, headers){
                 $scope.files.splice(index, 1);
+                $scope.allImg.splice(index, 1);
                 $scope.$apply();
                 carga();
             }
@@ -55,7 +84,9 @@ app.controller('publishUpdateAd1Ctrl', function ($scope, $http) {
 
     $scope.selecionada = function(t) {
 
-       
+        $scope.cargando = false;
+        $scope.$apply();
+        $(barraDeProgreso).css('width', '0%');
 
        up = new uploader(t, {
             url: direction2+'/upload',
@@ -63,34 +94,24 @@ app.controller('publishUpdateAd1Ctrl', function ($scope, $http) {
                 console.log('progress'); 
                 console.log(((ev.loaded/ev.total)*100)+'%'); 
             },
+            onprogress:function(ev){ 
+
+                var a = ((ev.loaded/ev.total)*100);
+                a = a+'%';
+                $(barraDeProgreso).css('width', a);
+            },
             error:function(ev){ 
+                $scope.cargando = true;
+                $scope.$apply();
                 console.log('error'); 
             },
-            success:function(data){ 
-                data = JSON.parse(data);
-                type = data.result.files.file[0].type;
-
-                       $.ajax({
-                        url: direction+'Multimedia',  
-                        type: 'POST',
-                        data: {
-                            anuncioId: sessionStorage.getItem("anuncioInsertado"),
-                            url: direction2+'/download/'+t.files[0].name,
-                            type: type
-                        },
-                        success:function(data){
-                            
-                            console.log('insertada bien la foto');
-                            carga();
-                        }
-                    });
-                 
+            success:function(){ 
+                $scope.cargando = true;
+                $scope.$apply();
+                carga();
             }
         });
-
         up.send();
-
-
     }
 
 

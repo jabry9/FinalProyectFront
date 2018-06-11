@@ -49,10 +49,7 @@
 
                 <div style="border: 1px solid black; box-shadow: 2px 2px 20px 2px grey; margin-top: 20px; padding: 5px;" class="portfolio-item" ng-repeat="x in misSolicitudes">
                        
-                        <img ng-show="x.empresa.logo != null" style="width: 300px; border-radius: 100%" data-original={{x.empresa.logo}} alt="img" class="preload-image" src={{x.empresa.logo}}/>
-                        <strong>{{x.empresa.name}}</strong>
-                        <strong>{{x.empresa.telephone}}</strong>
-                    
+                        
                     <div style="margin-left: 20px;">
                         <h4>Presupuesto: {{x.presupuesto}}</h4>
                         Descipcion:
@@ -60,43 +57,24 @@
                             {{x.description}}
                         </p>
                     </div>
+                    <hr style="border: 1px solid black; box-shadow: 2px 2px 20px 2px grey;">
+                    <br>
                     <div>
-                        <strong>Nombre: {{x.empresa.name}}</strong> <br>
-                        <strong>Telefono: {{x.empresa.telephone}}</strong>
+                        <h3>Empresa Solicitante</h3>
+                        <img ng-show="x.empresa.logo != null" style="width: 300px; border-radius: 100%" data-original={{x.empresa.logo}} alt="img" class="preload-image" src={{x.empresa.logo}}/>
+                        Nombre: <strong>{{x.empresa.name}}</strong> <br>
+                        Telefono: <strong>{{x.empresa.telephone}}</strong><br>
+                        Descripcion <br>
+                        <p>
+                            {{x.empresa.description}}
+                        </p>
 
                     </div>
-                    <!-- <button style="width: 90%; margin-left: 5%; margin-right: 5%; text-align: center" ng-show="x.solicitudes.length != 0" ng-click="misSolicitudes(x.id)" class="button button-green">Solicitudes</button> -->
-                    <!-- <button style="width: 90%; margin-left: 5%; margin-right: 5%; text-align: center" ng-show="x.solicitudes.length == 0" disabled class="button button-red">Aun no tiene Solicitudes</button> -->
                 </div>                                              
-            </div>  
-
-            
-
-           
-
-
-                   
+            </div>                                                                              
         </div>
-        
        
-        
-        <div class="footer footer-dark">
-            <a href="index.html" class="footer-logo scale-hover"></a>
-            <p>
-                Simplicity and complexity packed into a beautiful, 
-                feature filled, powerful, gorgeous mobile template.
-            </p>
-            <div class="decoration"></div>
-            <p class="copyright-text">Copyright <span id="copyright-year"></span>. All Rights Reserved.</p>
-        </div>
     </div>  
-</div>
-    
-<div class="share-bottom share-dark">
-    <h3>Share Page</h3>
-
-</div>
- 
-    
+</div>   
 </div>
 </body>

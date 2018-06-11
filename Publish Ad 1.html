@@ -49,18 +49,18 @@
                             <fieldset>
                                 <div class="formFieldWrap">
                                     <label class="field-title contactNameField" for="contactNameField">Titulo:<span>(required)</span></label>
-                                    <input type="text" ng-model="anuncio.titulo" name="contactNameField" value="" class="contactField requiredField" id="contactNameField"/>
+                                    <input type="text" ng-model="anuncio.titulo" required name="contactNameField" value="" class="contactField requiredField" id="contactNameField"/>
                                 </div>
                                 <div class="formFieldWrap">
                                     <label class="field-title contactNameField" for="contactNameField">Presupuesto Maximo:<span>(required)</span></label>
-                                    <input type="number" ng-model="anuncio.presupMAX" name="contactNameField" value="" class="contactField requiredField" id="contactNameField"/>
+                                    <input type="number" ng-model="anuncio.presupMAX" required name="contactNameField" value="" class="contactField requiredField" id="contactNameField"/>
                                 </div>
 
 
                                 <div class="container overflow-show">
                                     <h5 class="onoffswitch-text">Incluye materiales:</h5>
                                     <div class="onoffswitch-2">
-                                        <input ng-model="materialsINC" type="checkbox" name="onoffswitch" class="onoffswitch-checkbox-2" id="myonoffswitch-2">
+                                        <input ng-model="materialsINC" required type="checkbox" name="onoffswitch" class="onoffswitch-checkbox-2" id="myonoffswitch-2">
                                         <label class="onoffswitch-label-2" for="myonoffswitch-2"></label>
                                     </div>
                                     <div class="clear"></div>
@@ -68,7 +68,7 @@
 
                                 <div class="formTextareaWrap">
                                         <label class="field-title contactMessageTextarea" for="contactMessageTextarea">Descripcion: <span>(required)</span></label>
-                                        <textarea name="contactMessageTextarea" ng-model="anuncio.description" class="contactTextarea requiredField" id="contactMessageTextarea"></textarea>
+                                        <textarea required name="contactMessageTextarea" ng-model="anuncio.description" class="contactTextarea requiredField" id="contactMessageTextarea"></textarea>
                                 </div>
 
 
@@ -82,7 +82,7 @@
                                     </select>
                                 </div>
                                
-                                <a href="#" ng-click="publicaAd()" class="button button-green" style="display: block;margin: auto;">Siguiente</a>
+                                <a type="submit" href="#" ng-click="publicaAd()" class="button button-green" style="display: block;margin: auto;">Siguiente</a>
                             </fieldset>
                         </form>       
                     </div>
@@ -92,50 +92,7 @@
         </div>
         
         <div class="decoration decoration-margins"></div>
-        
-        <div class="footer footer-dark">
-            <a href="index.html" class="footer-logo scale-hover"></a>
-            <p>
-                Simplicity and complexity packed into a beautiful, 
-                feature filled, powerful, gorgeous mobile template.
-            </p>
-            <div class="decoration"></div>
-            <p class="copyright-text">Copyright <span id="copyright-year"></span>. All Rights Reserved.</p>
-        </div>
     </div>  
-</div>
-    
-<div class="share-bottom share-dark">
-    <h3>Share Page</h3>
-    <div class="ion-android-search">
-        <a href="https://www.facebook.com/sharer/sharer.php?u=http://www.themeforest.net/">
-            <i class="ion-social-facebook-outline icon-ghost facebook-bg"></i>
-            Facebook
-        </a>
-        <a href="https://twitter.com/home?status=Check%20out%20ThemeForest%20http://www.themeforest.net">
-            <i class="ion-social-twitter-outline twitter-bg"></i>
-            Twitter
-        </a>
-        <a href="https://plus.google.com/share?url=http://www.themeforest.net">
-            <i class="ion-social-googleplus-outline icon-ghost google-bg"></i>
-            Google
-        </a>
-        <a href="https://pinterest.com/pin/create/button/?url=http://www.themeforest.net/&media=https://0.s3.envato.com/files/63790821/profile-image.jpg&description=Themes%20and%20Templates">
-            <i class="ion-social-pinterest-outline icon-ghost pinterest-bg"></i>
-            Pinterest
-        </a>
-        <a href="sms:">
-            <i class="ion-ios-chatboxes-outline icon-ghost sms-bg"></i>
-            Text
-        </a>
-        <a href="mailto:?&subject=Check this page out!&body=http://www.themeforest.net">
-            <i class="ion-ios-email-outline icon-ghost mail-bg"></i>
-            Email
-        </a>
-        <div class="clear"></div>
-    </div>
-</div>
- 
-    
+</div>    
 </div>
 </body>

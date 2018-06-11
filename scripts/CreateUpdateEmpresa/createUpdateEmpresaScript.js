@@ -12,7 +12,7 @@ app.controller('editProfilerCtrl', function ($scope, $http) {
     $scope.empresa = {
         name: '',
         description: '',
-        telephone: 0,
+        telephone: '',
         logo: '',
         location: {
             lat: coord.coords.latitude,
@@ -131,9 +131,10 @@ app.controller('editProfilerCtrl', function ($scope, $http) {
                         contentType: 'application/json',
                         data: JSON.stringify($scope.empresa),
                     }).done(function (data) {
-                        alert('mostrar que se ha creado bien');
                         $scope.cargando = true;
                         $scope.$apply();
+                        alert('mostrar que se ha creado bien');
+                        $(location).attr('href', './CreateUpdateEmpresa.html', '_top');
                     }).fail(function (msg) {
                         console.log(msg);
                     });

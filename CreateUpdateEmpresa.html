@@ -45,8 +45,8 @@
 
         <div class="one-half-responsive">
             <div class="content">
-                <img src={{empresa.logo}} style="width: 200px; border-radius: 100%;" alt="" srcset="">
-                
+                <img src={{empresa.logo}} style="width: 200px; max-height: 200px; border-radius: 100%;" alt="" srcset="">
+
                 <div ng-show="cargando" class="input-icon">
                     Foto: 
                     <input type="file" class="input-text-box input-green-border" ng-model="fileToUp" onchange="angular.element(this).scope().selecionada(this)" accept="image/*" name="img">
